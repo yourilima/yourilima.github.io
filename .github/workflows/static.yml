@@ -45,9 +45,9 @@ jobs:
       - name: make final dir
         run: mkdir output
       - name: copy framework
-        run: cp bin/Release/net7.0/wwwroot/* output
+        run: cp -r bin/Release/net7.0/wwwroot/* output
       - name: make final dit
-        run: cp wwwroot/* output
+        run: cp -r wwwroot/* output
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
