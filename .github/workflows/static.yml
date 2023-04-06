@@ -43,11 +43,11 @@ jobs:
       - name: build
         run: dotnet build --configuration Release
       - name: make final dir
-        run: mkdir output
+        run: mkdir -v output
       - name: copy framework
-        run: cp -r bin/Release/net7.0/wwwroot/* output
-      - name: make final dit
-        run: cp -r wwwroot/* output
+        run: cp -rv bin/Release/net7.0/wwwroot/* output
+      - name: copy index
+        run: cp -rv wwwroot/* output
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
