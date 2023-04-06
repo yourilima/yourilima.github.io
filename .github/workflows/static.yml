@@ -48,12 +48,10 @@ jobs:
         run: cp -rv bin/Release/net7.0/wwwroot/* $RUNNER_TEMP/output
       - name: copy index
         run: cp -rv wwwroot/* $RUNNER_TEMP/output
-      - name: archive
-        run: tar --dereference --hard-dereference --directory "$RUNNER_TEMP/output" -cvf "$RUNNER_TEMP/artifact.tar"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ${{ runner.temp }}/artifact.tar
+          path: ${{ runner.temp }}/output
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
