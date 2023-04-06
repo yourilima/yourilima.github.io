@@ -43,15 +43,17 @@ jobs:
       - name: build
         run: dotnet build --configuration Release
       - name: make final dir
-        run: mkdir -v output
+        run: mkdir -v $RUNNER_TEMP/output
       - name: copy framework
-        run: cp -rv bin/Release/net7.0/wwwroot/* output
+        run: cp -rv bin/Release/net7.0/wwwroot/* $RUNNER_TEMP/output
       - name: copy index
-        run: cp -rv wwwroot/* output
+        run: cp -rv wwwroot/* $RUNNER_TEMP/output
+      - name: archive
+        run: tar --dereference --hard-dereference --directory "$RUNNER_TEMP/output" -cvf "$RUNNER_TEMP/artifact.tar"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'output'
+          path: ${{ runner.temp }}/artifact.tar
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
