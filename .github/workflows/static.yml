@@ -48,6 +48,8 @@ jobs:
         run: cp -rv bin/Release/net7.0/wwwroot/* $RUNNER_TEMP/output
       - name: copy index
         run: cp -rv wwwroot/* $RUNNER_TEMP/output
+      - name: 404 hack
+        run: cp -rv $RUNNER_TEMP/output/index.html $RUNNER_TEMP/output/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
