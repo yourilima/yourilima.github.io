@@ -6,6 +6,11 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<IRepository<Member>, MemberRepository>();
+var host = builder.Build();
+var logger = host.Services.GetRequiredService<ILoggerFactory>()
+    .CreateLogger<Program>();
 
-await builder.Build().RunAsync();
+logger.LogInformation("Logged after the app is built in Program.cs.");
+await host.RunAsync();
