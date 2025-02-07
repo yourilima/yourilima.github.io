@@ -51,7 +51,7 @@ jobs:
       - name: 404 hack
         run: cp -rv $RUNNER_TEMP/output/index.html $RUNNER_TEMP/output/404.html
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: ${{ runner.temp }}/output
       - name: Deploy to GitHub Pages
