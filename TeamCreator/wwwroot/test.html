@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(error => console.log('Service Worker registration failed:', error));
+        }
+    </script>
+
+  <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById("coordinates").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            document.getElementById("coordinates").innerHTML = `Latitude: ${latitude} <br> Longitude: ${longitude}`;
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("coordinates").innerHTML = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("coordinates").innerHTML = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("coordinates").innerHTML = "The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    document.getElementById("coordinates").innerHTML = "An unknown error occurred.";
+                    break;
+            }
+        }
+    </script>
+  <script>
+        window.onload = function() {
+            const canvas = document.getElementById('drawing');
+            const ctx = canvas.getContext('2d');
+
+            // Load the image
+            const img = new Image();
+            img.src = 'image.png'; // Replace with the path to your image
+
+            img.onload = function() {
+                // Draw the image on the canvas
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                // Draw a dot on the canvas
+                const dotX = 250; // X coordinate of the dot
+                const dotY = 250; // Y coordinate of the dot
+                const dotRadius = 5; // Radius of the dot
+
+                ctx.beginPath();
+                ctx.arc(dotX, dotY, dotRadius, 0, Math.PI * 2, true);
+                ctx.fillStyle = 'red'; // Color of the dot
+                ctx.fill();
+                ctx.closePath();
+            };
+        };
+    </script>
+</head>
+<body>
+    <h1>Minimal PWA</h1>
+    <p>This is a minimal Progressive Web App example.</p>
+  <canvas id="drawing">
+    
+  </canvas>
+</body>
+</html>
