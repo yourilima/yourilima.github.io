@@ -45,8 +45,8 @@
             console.log(latitude);
             console.log(longitude);
             // Draw a dot on the canvas
-                const dotX = latitude-56.045895337671205; // X coordinate of the dot
-                const dotY = longitude-8.115769968448399; // Y coordinate of the dot
+                const dotX = (latitude-56.045895337671205)*3000000; // X coordinate of the dot
+                const dotY = (longitude-8.115769968448399)*3000000; // Y coordinate of the dot
                 const dotRadius = 5; // Radius of the dot
 
                 ctx.beginPath();
@@ -65,12 +65,14 @@
 
                 
             };
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                console.log("Geolocation is not supported by this browser.");
+            function getPos(){
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    console.log("Geolocation is not supported by this browser.");
+                }
             }
+            setInterval(getPos, 1000);
         };
     </script>
 </head>
