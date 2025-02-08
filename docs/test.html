@@ -44,8 +44,7 @@ const img = new Image();
         function showPosition(position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-            console.log(latitude);
-            console.log(longitude);
+            console.log(position);
             // Draw a dot on the canvas, 
                 const dotY = (56.045857616798834-latitude)*1200000; // X coordinate of the dot
                 const dotX = (longitude-8.115638562938113)*1200000; // Y coordinate of the dot
