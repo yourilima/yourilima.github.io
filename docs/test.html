@@ -14,19 +14,7 @@
     </script>
 
   <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById("coordinates").innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function showPosition(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            document.getElementById("coordinates").innerHTML = `Latitude: ${latitude} <br> Longitude: ${longitude}`;
-        }
+       
 
         function showError(error) {
             switch(error.code) {
@@ -49,7 +37,31 @@
         window.onload = function() {
             const canvas = document.getElementById('drawing');
             const ctx = canvas.getContext('2d');
+ function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById("coordinates").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
 
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            document.getElementById("coordinates").innerHTML = `Latitude: ${latitude} <br> Longitude: ${longitude}`;
+    console.log(latitude);
+            console.log(longitude);
+            // Draw a dot on the canvas
+                const dotX = latitude; // X coordinate of the dot
+                const dotY = longitude; // Y coordinate of the dot
+                const dotRadius = 5; // Radius of the dot
+
+                ctx.beginPath();
+                ctx.arc(dotX, dotY, dotRadius, 0, Math.PI * 2, true);
+                ctx.fillStyle = 'red'; // Color of the dot
+                ctx.fill();
+                ctx.closePath();
+        }
             // Load the image
             const img = new Image();
             img.src = 'https://wpmedia.roomsketcher.com/content/uploads/2022/01/06145940/What-is-a-floor-plan-with-dimensions.png'; // Replace with the path to your image
@@ -58,16 +70,7 @@
                 // Draw the image on the canvas
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-                // Draw a dot on the canvas
-                const dotX = 250; // X coordinate of the dot
-                const dotY = 250; // Y coordinate of the dot
-                const dotRadius = 5; // Radius of the dot
-
-                ctx.beginPath();
-                ctx.arc(dotX, dotY, dotRadius, 0, Math.PI * 2, true);
-                ctx.fillStyle = 'red'; // Color of the dot
-                ctx.fill();
-                ctx.closePath();
+                
             };
         };
     </script>
