@@ -37,13 +37,7 @@
         window.onload = function() {
             const canvas = document.getElementById('drawing');
             const ctx = canvas.getContext('2d');
- function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById("coordinates").innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
+            
 
         function showPosition(position) {
             const latitude = position.coords.latitude;
@@ -64,7 +58,7 @@
         }
             // Load the image
             const img = new Image();
-            img.src = 'https://wpmedia.roomsketcher.com/content/uploads/2022/01/06145940/What-is-a-floor-plan-with-dimensions.png'; // Replace with the path to your image
+            img.src = 'https://glennovits.github.io/occ-oversigt.png'; // Replace with the path to your image
 
             img.onload = function() {
                 // Draw the image on the canvas
@@ -72,6 +66,12 @@
 
                 
             };
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
         };
     </script>
 </head>
