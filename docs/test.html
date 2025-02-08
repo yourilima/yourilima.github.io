@@ -44,8 +44,8 @@
             const longitude = position.coords.longitude;
             console.log(latitude);
             console.log(longitude);
-            // Draw a dot on the canvas
-                const dotX = (latitude-56.045895337671205)*3000000; // X coordinate of the dot
+            // Draw a dot on the canvas56.04572642708889, 8.115868435177012
+                const dotX = (latitude-56.04572642708889)*3000000; // X coordinate of the dot
                 const dotY = (longitude-8.115769968448399)*3000000; // Y coordinate of the dot
             console.log(dotX,dotY);
                 const dotRadius = 5; // Radius of the dot
@@ -78,10 +78,7 @@
     </script>
 </head>
 <body>
-    <h1>Minimal PWA</h1>
-    <p>This is a minimal Progressive Web App example.</p>
   <canvas id="drawing" width="1598" height="1764">
-    
   </canvas>
 </body>
 </html>
