@@ -51,11 +51,16 @@ const img = new Image();
                 const dotX = (longitude-8.115638562938113)*1200000; // Y coordinate of the dot
             document.getElementById("debug").innerHTML = dotX + " - " + dotY;
             console.log(dotX,dotY);
-                const dotRadius = 10; // Radius of the dot
+                const dotRadius = position.accuracy; // Radius of the dot
                 ctx.clearRect(0, 0, canvas.width, canvas.height);    
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
-                ctx.arc(dotX, dotY, dotRadius, 0, Math.PI * 2, true);
+                ctx.arc(dotX, dotY, dotRadius+5, 0, Math.PI * 2, true);
+                ctx.fillStyle = 'blue'; // Color of the dot
+                ctx.fill();
+                ctx.closePath();
+            ctx.beginPath();
+                ctx.arc(dotX, dotY, 5, 0, Math.PI * 2, true);
                 ctx.fillStyle = 'red'; // Color of the dot
                 ctx.fill();
                 ctx.closePath();
