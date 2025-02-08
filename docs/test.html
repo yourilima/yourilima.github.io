@@ -55,11 +55,6 @@ const img = new Image();
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 ctx.arc(dotX, dotY, dotRadius+5, 0, Math.PI * 2, true);
-                ctx.fillStyle = 'blue'; // Color of the dot
-                ctx.fill();
-                ctx.closePath();
-            ctx.beginPath();
-                ctx.arc(dotX, dotY, 5, 0, Math.PI * 2, true);
                 ctx.fillStyle = 'red'; // Color of the dot
                 ctx.fill();
                 ctx.closePath();
