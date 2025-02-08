@@ -44,9 +44,9 @@
             const longitude = position.coords.longitude;
             console.log(latitude);
             console.log(longitude);
-            // Draw a dot on the canvas56.04572642708889, 8.115868435177012
-                const dotX = (latitude-56.04572642708889)*3000000; // X coordinate of the dot
-                const dotY = (longitude-8.115769968448399)*3000000; // Y coordinate of the dot
+            // Draw a dot on the canvas56.045857616798834, 8.115638562938113
+                const dotX = (latitude-8.115769968448399)*3000000; // X coordinate of the dot
+                const dotY = (longitude-56.04572642708889)*3000000; // Y coordinate of the dot
             document.getElementById("debug").innerHTML = dotX + " - " dotY;
             console.log(dotX,dotY);
                 const dotRadius = 5; // Radius of the dot
