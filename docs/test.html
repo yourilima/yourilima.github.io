@@ -19,18 +19,19 @@
         function showError(error) {
             switch(error.code) {
                 case error.PERMISSION_DENIED:
-                    document.getElementById("coordinates").innerHTML = "User denied the request for Geolocation.";
+                    document.getElementById("debug").innerHTML = "User denied the request for Geolocation.";
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    document.getElementById("coordinates").innerHTML = "Location information is unavailable.";
+                    document.getElementById("debug").innerHTML = "Location information is unavailable.";
                     break;
                 case error.TIMEOUT:
-                    document.getElementById("coordinates").innerHTML = "The request to get user location timed out.";
+                    document.getElementById("debug").innerHTML = "The request to get user location timed out.";
                     break;
                 case error.UNKNOWN_ERROR:
-                    document.getElementById("coordinates").innerHTML = "An unknown error occurred.";
+                    document.getElementById("debug").innerHTML = "An unknown error occurred.";
                     break;
             }
+            console.log(error);
         }
     </script>
   <script>
@@ -70,12 +71,17 @@ const img = new Image();
             };
             function getPos(){
                 if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                    const watchId = navigator.geolocation.watchPosition(showPosition, showError, {
+                        enableHighAccuracy: true,
+                        maximumAge: 0,
+                        timeout: 500000
+                    });
                 } else {
                     console.log("Geolocation is not supported by this browser.");
                 }
             }
-            setInterval(getPos, 1000);
+            getPos();
+            
             canvas.style.transform = `rotate(${20}deg)`;
         };
     </script>
