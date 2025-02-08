@@ -50,7 +50,7 @@ const img = new Image();
                 const dotX = (longitude-8.115638562938113)*1200000; // Y coordinate of the dot
             document.getElementById("debug").innerHTML = dotX + " - " + dotY;
             console.log(dotX,dotY);
-                const dotRadius = 5; // Radius of the dot
+                const dotRadius = 10; // Radius of the dot
                 ctx.clearRect(0, 0, canvas.width, canvas.height);    
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
