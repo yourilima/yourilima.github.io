@@ -27,6 +27,9 @@
             bottomright.Latitude = 56.04519902028412;
             bottomright.Longtitude = 8.117321715301422;
             map = new GeoMap(canvas, 'map.png', topleft, bottomright);
+            map.onError = (error) => {
+                console.log(error);
+            };
             map.Run();
 
             //canvas.style.transform = `rotate(${20}deg)`;
@@ -35,7 +38,6 @@
 </head>
 
 <body>
-    <h1 id="debug"></h1>
     <canvas id="drawing">
     </canvas>
 </body>
