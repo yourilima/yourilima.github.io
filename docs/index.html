@@ -21,12 +21,12 @@
         window.onload = function () {
             var canvas = document.getElementById('drawing');
             var topleft = new Position();
-            topleft.Latitude = 56.045857616798834;
-            topleft.Longtitude = 8.115638562938113;
+            topleft.Latitude = 56.04588955403956;
+            topleft.Longtitude = 8.115321227528945;
             var bottomright = new Position();
-            bottomright.Latitude = 56.04471910339384;
-            bottomright.Longtitude = 8.117105981531083;
-            map = new GeoMap(canvas, 'https://glennovits.github.io/occ-oversigt.png', topleft, bottomright);
+            bottomright.Latitude = 56.04519902028412;
+            bottomright.Longtitude = 8.117321715301422;
+            map = new GeoMap(canvas, 'map.png', topleft, bottomright);
             map.Run();
 
             //canvas.style.transform = `rotate(${20}deg)`;
