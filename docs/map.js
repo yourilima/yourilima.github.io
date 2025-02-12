@@ -91,13 +91,13 @@ class GeoMap {
 
   #drawLocation(x, y, accuracy) {
     this.context.beginPath();
-    this.context.arc(x, y, (accuracy*0.00001)*this.#ratioHeight(), 0, Math.PI * 2, true);
-    this.context.fillStyle = 'blue'; // Color of the dot
+    this.context.arc(x, y, (accuracy*0.00001)*((this.#ratioHeight()+this.#ratioWidth())/2), 0, Math.PI * 2, true);
+    this.context.fillStyle = "rgb(99 173 248 / 50%)"; // Color of the dot
     this.context.fill();
     this.context.closePath();
     this.context.beginPath();
     this.context.arc(x, y, 5, 0, Math.PI * 2, true);
-    this.context.fillStyle = 'red'; // Color of the dot
+    this.context.fillStyle = 'rgb(255 0 0)'; // Color of the dot
     this.context.fill();
     this.context.closePath();
   }
