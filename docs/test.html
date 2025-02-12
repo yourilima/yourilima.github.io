@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal PWA</title>
+    <title>Map follower</title>
     <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
@@ -14,37 +14,9 @@
     </script>
 
   <script>
-       
-
-        function showError(error) {
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    document.getElementById("debug").innerHTML = "User denied the request for Geolocation.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    document.getElementById("debug").innerHTML = "Location information is unavailable.";
-                    break;
-                case error.TIMEOUT:
-                    document.getElementById("debug").innerHTML = "The request to get user location timed out.";
-                    break;
-                case error.UNKNOWN_ERROR:
-                    document.getElementById("debug").innerHTML = "An unknown error occurred.";
-                    break;
-            }
-            console.log(error);
-        }
-    </script>
-  <script>
-        window.onload = function() {
-            const canvas = document.getElementById('drawing');
-            const ctx = canvas.getContext('2d');
-            
-const img = new Image();
-            img.src = 'https://glennovits.github.io/occ-oversigt.png'; // Replace with the path to your image
-        function showPosition(position) {
+        function showPosition(position, ctx) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-            console.log(position);
             // Draw a dot on the canvas, 
                 const dotY = (56.045857616798834-latitude)*1200000; // X coordinate of the dot
                 const dotX = (longitude-8.115638562938113)*1200000; // Y coordinate of the dot
@@ -64,6 +36,33 @@ const img = new Image();
                 ctx.fill();
                 ctx.closePath();
         }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+            console.log(error);
+        }
+    </script>
+  <script>
+        window.onload = function() {
+            const canvas = document.getElementById('drawing');
+            const ctx = canvas.getContext('2d');
+            
+const img = new Image();
+            img.src = 'https://glennovits.github.io/occ-oversigt.png'; // Replace with the path to your image
+       
             // Load the image
             
 
@@ -75,7 +74,9 @@ const img = new Image();
             };
             function getPos(){
                 if (navigator.geolocation) {
-                    const watchId = navigator.geolocation.watchPosition(showPosition, showError, {
+                    const watchId = navigator.geolocation.watchPosition(function (position) {
+                        showPosition(position, ctx)
+                    }, showError, {
                         enableHighAccuracy: true,
                         maximumAge: 0,
                         timeout: 500000
