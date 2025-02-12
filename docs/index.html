@@ -1,0 +1,43 @@
+´
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=contain">
+    <title>Map follower</title>
+    <link rel="manifest" href="manifest.json">
+    <script src="map.js" />
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(error => console.log('Service Worker registration failed:', error));
+        }
+    </script>
+
+    <script>
+        var map;
+        window.onload = function () {
+            var canvas = document.getElementById('drawing');
+            var topleft = new Position();
+            topleft.Latitude = 56.045857616798834;
+            topleft.Longtitude = 8.115638562938113;
+            var bottomright = new Position();
+            bottomright.Latitude = 56.04471910339384;
+            bottomright.Longtitude = 8.117105981531083;
+            map = new GeoMap(canvas, 'https://glennovits.github.io/occ-oversigt.png', topleft, bottomright);
+            map.Run();
+
+            //canvas.style.transform = `rotate(${20}deg)`;
+        };
+    </script>
+</head>
+
+<body>
+    <h1 id="debug"></h1>
+    <canvas id="drawing">
+    </canvas>
+</body>
+
+</html>
